@@ -1,0 +1,458 @@
+---
+const telegramBotUrl = 'https://t.me/asya_for_creators_bot?start=dl-17611235582e4ebf4da7d7'; // Замените на ссылку вашего бота
+---
+
+<html lang="ru" class="dark">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Браслет на миллион!</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	</head>
+	<body>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			
+			body {
+				background: linear-gradient(135deg, #ffdab9 0%, #ffa07a 100%);
+				min-height: 100vh;
+				color: #777777;
+				font-family: 'Inter', system-ui, -apple-system, sans-serif;
+			}
+			
+			.container {
+				max-width: 1200px;
+				margin: 0 auto;
+				padding: 0 1rem;
+			}
+			
+			.hero h1 {
+				font-size: clamp(2rem, 5vw, 3.5rem);
+				font-weight: 700;
+				line-height: 1.2;
+				margin-bottom: 1.5rem;
+				background: linear-gradient(135deg, #d2691e, #8b4513);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				background-clip: text;
+			}
+			
+			.hero p {
+				font-size: 1.2rem;
+				color: #666666;
+				margin-bottom: 1rem;
+				max-width: 800px;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			
+			.reading-time {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+				color: #9ca3af;
+				justify-content: center;
+			}
+			
+			section {
+				padding: 3rem 0;
+			}
+			
+			.prose {
+				max-width: 48rem;
+				margin: 0 auto;
+				line-height: 1.8;
+			}
+			
+			.prose p {
+				font-size: 1.1rem;
+				color: #666666;
+				margin-bottom: 1.5rem;
+			}
+			
+			.prose h2 {
+				font-size: 2rem;
+				font-weight: 600;
+				margin: 2.5rem 0 1.5rem 0;
+				color: #333333;
+			}
+			
+			.prose blockquote {
+				border-left: 4px solid #3b82f6;
+				padding-left: 1rem;
+				margin: 1.5rem 0;
+				font-style: italic;
+				color: #d1d5db;
+			}
+			
+			.offer-card {
+				background: rgba(255, 255, 255, 0.9);
+				backdrop-filter: blur(10px);
+				border: 1px solid rgba(210, 105, 30, 0.2);
+				border-radius: 1rem;
+				padding: 2rem;
+				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+			}
+			
+			.offer-card h2 {
+				font-size: 2rem;
+				font-weight: 700;
+				margin-bottom: 1rem;
+				color: #8b4513;
+			}
+			
+			.offer-card p {
+				font-size: 1.1rem;
+				color: #666666;
+				margin-bottom: 1.5rem;
+			}
+			
+			.feature-list {
+				list-style: none;
+				padding: 0;
+				margin-bottom: 2rem;
+			}
+			
+			.feature-list li {
+				display: flex;
+				align-items: center;
+				gap: 0.75rem;
+				margin-bottom: 1rem;
+				color: #666666;
+			}
+			
+			.feature-list .check {
+				color: #4ade80;
+				margin-top: 0.125rem;
+			}
+			
+			.check {
+				color: #d2691e;
+				font-weight: bold;
+				font-size: 1.2rem;
+			}
+			
+			.price {
+				font-size: 2rem;
+				font-weight: bold;
+				color: #8b4513;
+				text-align: center;
+				margin-bottom: 2rem;
+			}
+			
+			.old-price {
+				color: #9ca3af;
+				text-decoration: line-through;
+			}
+			
+			.new-price {
+				color: #d2691e;
+				margin-left: 0.5rem;
+			}
+			
+			.cta-buttons {
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
+				align-items: center;
+			}
+			
+			.btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.75rem;
+				padding: 1rem 2rem;
+				border-radius: 0.75rem;
+				font-weight: 600;
+				text-decoration: none;
+				transition: all 0.2s ease;
+				border: none;
+				cursor: pointer;
+				font-size: 1.1rem;
+			}
+			
+			.btn-primary {
+				background: linear-gradient(135deg, #2d3748, #1a202c);
+				color: white;
+				box-shadow: 0 4px 15px rgba(45, 55, 72, 0.3);
+				position: relative;
+				overflow: hidden;
+			}
+			
+			.btn-primary::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: -100%;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+				animation: shimmer 2s infinite;
+			}
+			
+			.btn-primary:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 6px 20px rgba(45, 55, 72, 0.4);
+			}
+			
+			.btn-primary:hover::before {
+				animation-duration: 1s;
+			}
+			
+			@keyframes shimmer {
+				0% {
+					left: -100%;
+				}
+				100% {
+					left: 100%;
+				}
+			}
+			
+			@keyframes pulse {
+				0%, 100% {
+					transform: scale(1);
+				}
+				50% {
+					transform: scale(1.05);
+				}
+			}
+			
+			.btn-primary:hover {
+				animation: pulse 2s infinite;
+			}
+			
+			.btn-secondary {
+				background: #1f2937;
+				color: white;
+				border: 1px solid #4b5563;
+			}
+			
+			.btn-secondary:hover {
+				background: #111827;
+				transform: scale(1.05);
+			}
+			
+			.btn svg {
+				width: 1.5rem;
+				height: 1.5rem;
+			}
+			
+			@media (min-width: 768px) {
+				.cta-buttons {
+					flex-direction: row;
+					justify-content: center;
+				}
+				
+				.btn {
+					width: auto;
+				}
+			}
+			
+			.scroll-animate {
+				opacity: 0;
+				transform: translateY(30px);
+				transition: all 0.8s ease-out;
+			}
+			
+			.scroll-animate.visible {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		</style>
+		<div class="min-h-screen">
+			<!-- Hero Section -->
+			<section class="hero scroll-animate">
+				<div class="container">
+					<div style="text-align: center;">
+						<h1>Как закрытие бизнеса в России привело к созданию «Браслета на миллион»</h1>
+						<p>Представь: ты сидишь в удобном кресле, в руках — прохладные натуральные камни, которые идеально подходят под твой запрос. На часах вечер, дома тишина. За последние 20 минут ты не просто создала украшение — ты создала артефакт, который принесет тебе чистую прибыль в 2 500 – 5 000 рублей.</p>
+						<p>Без съемок Reels 24/7, без закупки тонн товара и без необходимости быть дипломированным геммологом.</p>
+						<div style="margin: 2rem 0; text-align: center;">
+							<img src="/src/images/hero-main.jpg" alt="Главное фото" style="width: 100%; max-width: 600px; height: 400px; object-fit: cover; border-radius: 0.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+						</div>
+						<p>Если ты читаешь это, скорее всего, ты сейчас в одной из трех ситуаций:</p>
+						<ul style="text-align: left; max-width: 600px; margin: 0 auto; color: #666666;">
+							<li style="margin-bottom: 0.5rem;">Ты мастер и чувствуешь, что твои работы «как у всех», а аудитория засыпает.</li>
+							<li style="margin-bottom: 0.5rem;">Ты ищешь дело для души, которое будет приносить не «спасибо», а реальные деньги (на тот самый СПА или закрытие кредитов).</li>
+							<li style="margin-bottom: 0.5rem;">Ты просто устала от «дня сурка» и хочешь видеть результат своего труда не в таблицах Excel, а на запястьях довольных клиентов.</li>
+						</ul>
+						<p style="margin-top: 1rem;">Я знаю это чувство. Потому что я прошла путь от владения сетью магазинов до полного нуля.</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- Content Section -->
+			<section class="scroll-animate">
+				<div class="container">
+					<div class="prose">
+						<h2>Точка невозврата. Как рухнула старая жизнь</h2>
+						<div style="display: flex; gap: 2rem; align-items: center; margin: 2rem 0; flex-wrap: wrap;">
+							<div style="flex: 1; min-width: 300px;">
+								<p>Еще недавно у меня был успешный бизнес. Путь «мастера на балконе», который вырос в два полноценных магазина в разных концах страны и десятки шоурумов, которые сами просили мои украшения на реализацию.</p>
+								<p>А потом всё изменилось. Переезд в другую страну, а через время — тяжелое решение закрыть бизнес в России.</p>
+							</div>
+							<div style="flex: 0 0 300px; text-align: center;">
+								<img src="/src/images/old-business.jpg" alt="Старый бизнес" style="width: 100%; height: 200px; object-fit: cover; border-radius: 0.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+							</div>
+						</div>
+						<p>В один день я поняла: старого источника дохода больше нет. Опоры нет. Нужно начинать сначала.</p>
+						<p>Именно в этот момент родился «Браслет на миллион». Это не просто украшение — это система, которая позволила мне и моим ученицам не просто «выжить», а выйти на доходы, которые раньше казались возможными только при наличии огромного штата сотрудников.</p>
+						
+						<h2>Почему «просто бусики» больше не работают?</h2>
+						<div style="margin: 2rem 0; text-align: center;">
+							<img src="/src/images/competitors.jpg" alt="Конкуренты" style="width: 100%; max-width: 500px; height: 300px; object-fit: cover; border-radius: 0.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+						</div>
+						<p>Рынок завален ширпотребом. Зайди на любой маркетплейс — там тысячи одинаковых браслетов из дешевых камней и фурнитуры с Алиэкспресса. Мастера подражают друг другу, демпингуют и в итоге работают за копейки.</p>
+						<div style="display: flex; gap: 2rem; align-items: center; margin: 2rem 0; flex-wrap: wrap; flex-direction: row-reverse;">
+							<div style="flex: 1; min-width: 300px;">
+								<p>В чем секрет, о котором молчат «гуру» бижутерии?</p>
+								<p><strong>Люди покупают не камни. Они покупают состояние и решение своего запроса.</strong></p>
+								<p>Страшная тайна рынка в том, что 99% мастеров боятся давать смыслы. Они продают «визуал», а я научу тебя продавать «инструмент настройки жизни». Когда браслет собран под конкретную задачу клиента — он не может стоить дешево.</p>
+								<p>Именно поэтому наши браслеты покупают за 6 500 рублей, пока конкуренты пытаются продать свои за 800.</p>
+							</div>
+						</div>
+						
+						<h2>Метод, который освобождает руки (и голову)</h2>
+						<p>Многие думают, что для создания дорогих украшений нужно скупить половину камней мира или закончить институт минералогии. Это миф.</p>
+						<p>Моя методика «Браслет на миллион» — это:</p>
+						<ul style="color: #666666;">
+							<li style="margin-bottom: 0.5rem;">❌ БЕЗ огромных вложений: Тебе не нужен склад камней. Достаточно небольшого набора под запрос, ножниц и зажигалки.</li>
+							<li style="margin-bottom: 0.5rem;">❌ БЕЗ скучной науки: Тебе не нужно годами изучать геммологию.</li>
+							<li style="margin-bottom: 0.5rem;">❌ БЕЗ эзотерических дебрей: Я дам тебе четкую таблицу по камням, их свойствам и силе. Ты будешь точно знать, что и зачем ты соединяешь.</li>
+						</ul>
+						<div style="display: flex; gap: 2rem; align-items: center; margin: 2rem 0; flex-wrap: wrap;">
+							<div style="flex: 1; min-width: 300px;">
+								<p>Создание одного такого браслета занимает всего 20 минут.</p>
+							</div>
+							<div style="flex: 0 0 300px; text-align: center;">
+								<img src="/src/images/process-creation.jpg" alt="Процесс создания" style="width: 100%; height: 200px; object-fit: cover; border-radius: 0.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+							</div>
+						</div>
+						
+						<h2>Математика твоей финансовой свободы</h2>
+						<p>Давай посчитаем честно.</p>
+						<p>Средняя цена такого браслета при продаже на заказ — 3 500 - 6 500 рублей.</p>
+						<p>Себестоимость материалов — меньше 1 000 рублей.</p>
+						<p>Даже если ты делаешь всего 1 браслет в день (всего 20 минут работы!), при пятидневке ты получаешь от 70 000 рублей дополнительного дохода в месяц.</p>
+						<p>Это реальные истории моих девчонок:</p>
+						<p>Одна из учениц вышла на стабильные +80 000 рублей в месяц, просто проводя МК и делая подборы. А другая — продала свой салон красоты и полностью ушла в «бусики», потому что здесь свободы и денег оказалось больше.</p>
+						
+						<h2>Твой тест-драйв новой жизни за 1 900 рублей</h2>
+						<p>Я не предлагаю тебе сразу покупать дорогое обучение. Я хочу, чтобы ты попробовала эту систему «на вкус».</p>
+						<p>Я упаковала весь свой опыт в Мастер-класс «Браслет на миллион».</p>
+						<p>Это выжимка методики, которая принесла мне больше 1 000 000 рублей.</p>
+						<p><strong>Что внутри:</strong></p>
+						<ol style="color: #666666;">
+							<li style="margin-bottom: 0.5rem;">Пошаговая технология сборки браслета, который выглядит дорого.</li>
+							<li style="margin-bottom: 0.5rem;">Алгоритм подбора камней под запрос клиента.</li>
+							<li style="margin-bottom: 0.5rem;">Таблица свойств минералов (твой главный шпаргалка).</li>
+						</ol>
+						<div style="display: flex; gap: 2rem; align-items: center; margin: 2rem 0; flex-wrap: wrap;">
+							<div style="flex: 1; min-width: 300px;">
+								<p>Цена вопроса — 1 900 рублей.</p>
+								<p>(Это стоимость пары чашек кофе, которая может стать твоим билетом в новую профессию).</p>
+								<p><strong>Моя личная гарантия:</strong> Если через 15 минут после просмотра ты поймешь, что это «не твоё» — я верну тебе деньги. Без лишних вопросов и обид. Все риски я беру на себя.</p>
+							</div>
+							<div style="flex: 0 0 300px; text-align: center;">
+								<img src="/src/images/masterclass.jpg" alt="Мастер-класс" style="width: 100%; height: 200px; object-fit: cover; border-radius: 0.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+							</div>
+						</div>
+						
+						<h2>У тебя есть 3 пути</h2>
+						<ol style="color: #666666;">
+							<li style="margin-bottom: 1rem;">Оставить всё как есть. Продолжить смотреть на успех других в соцсетях и ждать «лучшего момента», пока депрессия от дня сурка затягивает всё глубже.</li>
+							<li style="margin-bottom: 1rem;">Попробовать самой. Перелопатить тонны мусора в интернете, слить деньги на некачественные камни и через полгода увидеть, как девушка из твоего же офиса увольняется, потому что открыла свой магазин украшений по моей методике.</li>
+							<li style="margin-bottom: 1rem;">Зайти в систему. Забрать готовое решение, потратить вечер на обучение и уже через неделю держать в руках свой первый браслет, за который тебе захотят заплатить.</li>
+						</ol>
+						<p style="text-align: center; font-weight: bold; margin: 2rem 0;">Забирай мастер-класс по ссылке ниже и начнем создавать твою историю на миллион:</p>
+						<div style="text-align: center; margin: 3rem 0;">
+							<a href={telegramBotUrl} class="btn btn-primary" style="font-size: 1.3rem; padding: 1.2rem 3rem;">
+								<svg fill="currentColor" viewBox="0 0 24 24">
+									<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.56c-.21 2.27-1.13 7.69-1.6 10.21-.2 1.07-.59 1.43-.96 1.46-.82.07-1.44-.54-2.23-1.06-1.24-.81-1.94-1.32-3.14-2.11-1.39-.89-.49-1.38.3-2.18.21-.21 3.77-3.45 3.84-3.75.01-.04.01-.18-.07-.26s-.2-.05-.29-.03c-.12.03-2.09 1.33-5.91 3.9-.56.38-1.06.57-1.52.56-.5-.01-1.46-.28-2.18-.51-.88-.28-1.57-.43-1.51-.91.03-.25.38-.51 1.05-.78 4.11-1.79 6.85-2.97 8.21-3.54 3.92-1.63 4.73-1.91 5.24-1.92.12 0 .37.03.53.17.14.12.18.28.16.44-.02.06.02.23-.02.36z"/>
+								</svg>
+								ХОЧУ НА МАСТЕР-КЛАСС
+							</a>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Offer Section -->
+			<section class="scroll-animate">
+				<div class="container">
+					<div class="offer-card">
+						<h2>Мастер-класс «Браслет на миллион»</h2>
+						<p>Выжимка методики, которая принесла мне больше 1 000 000 рублей. Готовое решение для создания украшений, которые покупают за 6 500 рублей.</p>
+						<ul class="feature-list">
+							<li>
+								<span class="check">✓</span>
+								<span>Пошаговая технология сборки браслета, который выглядит дорого</span>
+							</li>
+							<li>
+								<span class="check">✓</span>
+								<span>Алгоритм подбора камней под запрос клиента</span>
+							</li>
+							<li>
+								<span class="check">✓</span>
+								<span>Таблица свойств минералов (твой главный шпаргалка)</span>
+							</li>
+							<li>
+								<span class="check">✓</span>
+								<span>Личная гарантия возврата денег, если «не твоё»</span>
+							</li>
+						</ul>
+						<div class="price">
+							<span class="old-price">3 500 ₽</span>
+							<span class="new-price">1 900 ₽</span>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- CTA Section -->
+			<section class="scroll-animate">
+				<div class="container">
+					<div style="text-align: center;">
+						<p style="color: #888888; font-size: 1.1rem; margin-bottom: 2rem;">Начни свой путь к финансовой свободе уже сегодня</p>
+						<div style="margin: 3rem 0;">
+							<a href={telegramBotUrl} class="btn btn-primary" style="font-size: 1.3rem; padding: 1.2rem 3rem;">
+								<svg fill="currentColor" viewBox="0 0 24 24">
+									<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.56c-.21 2.27-1.13 7.69-1.6 10.21-.2 1.07-.59 1.43-.96 1.46-.82.07-1.44-.54-2.23-1.06-1.24-.81-1.94-1.32-3.14-2.11-1.39-.89-.49-1.38.3-2.18.21-.21 3.77-3.45 3.84-3.75.01-.04.01-.18-.07-.26s-.2-.05-.29-.03c-.12.03-2.09 1.33-5.91 3.9-.56.38-1.06.57-1.52.56-.5-.01-1.46-.28-2.18-.51-.88-.28-1.57-.43-1.51-.91.03-.25.38-.51 1.05-.78 4.11-1.79 6.85-2.97 8.21-3.54 3.92-1.63 4.73-1.91 5.24-1.92.12 0 .37.03.53.17.14.12.18.28.16.44-.02.06.02.23-.02.36z"/>
+								</svg>
+								ХОЧУ НА МАСТЕР-КЛАСС
+							</a>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		<script>
+			document.addEventListener('DOMContentLoaded', () => {
+			  const observerOptions = {
+			    threshold: 0.1,
+			    rootMargin: '0px 0px -50px 0px'
+			  };
+
+			  const observer = new IntersectionObserver((entries) => {
+			    entries.forEach(entry => {
+			      if (entry.isIntersecting) {
+			        entry.target.classList.add('visible');
+			      }
+			    });
+			  }, observerOptions);
+
+			  const animatedElements = document.querySelectorAll('.scroll-animate');
+			  animatedElements.forEach(el => observer.observe(el));
+			});
+		</script>
+	</body>
+</html>
