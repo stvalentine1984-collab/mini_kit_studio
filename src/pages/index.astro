@@ -526,6 +526,8 @@ const telegramBotUrl = 'https://t.me/asya_for_creators_bot?start=dl-17611235582e
 				console.log('Image path:', imagePath); // Для отладки
 				
 				const img = document.getElementById('energyImage');
+				console.log('Image element found:', !!img); // Проверяем что элемент найден
+				
 				img.onload = function() {
 					console.log('Image loaded successfully');
 				};
@@ -534,9 +536,12 @@ const telegramBotUrl = 'https://t.me/asya_for_creators_bot?start=dl-17611235582e
 					// Пробуем другой путь или заглушку
 					img.src = `/images/money_stone/money_1.jpg`; // fallback
 				};
+				
+				console.log('Setting image src to:', imagePath);
 				img.src = imagePath;
 				
 				document.getElementById('resultBlock').style.display = 'block';
+				console.log('Result block displayed');
 				
 				// Плавный скролл к результату
 				document.getElementById('resultBlock').scrollIntoView({ behavior: 'smooth' });
