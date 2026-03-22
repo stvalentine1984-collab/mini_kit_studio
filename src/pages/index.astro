@@ -526,32 +526,17 @@ const telegramBotUrl = 'https://t.me/asya_for_creators_bot?start=dl-17611235582e
 				const img = document.getElementById('energyImage');
 				console.log('Image element found:', !!img);
 				
-				// Используем тот же путь что и другие картинки
-				const imagePath = `/images/money_stone/money_${total}.jpg`;
+				// Пробуем путь в корне images
+				const imagePath = `/images/money_${total}.jpg`;
 				console.log('Setting image src to:', imagePath);
-				
-				let retryCount = 0;
-				const maxRetries = 1;
 				
 				img.onload = function() {
 					console.log('Image loaded successfully');
 				};
 				img.onerror = function() {
-					console.log('Image failed to load, trying hero image as test');
-					if (retryCount < maxRetries) {
-						retryCount++;
-						// Пробуем рабочую картинку для проверки
-						img.src = '/images/hero-main.jpg';
-						setTimeout(() => {
-							console.log('Now trying money stone again');
-							img.src = imagePath;
-						}, 1000);
-					} else {
-						console.log('Max retries reached, using hero image permanently');
-						img.src = '/images/hero-main.jpg';
-						// Добавляем текст что это заглушка
-						img.alt = `Заглушка для энергии ${arcanaNames[total]}`;
-					}
+					console.log('Image failed to load, using hero image permanently');
+					img.src = '/images/hero-main.jpg';
+					img.alt = `Заглушка для энергии ${arcanaNames[total]}`;
 				};
 				
 				img.src = imagePath;
