@@ -463,21 +463,40 @@ const telegramBotUrl = 'https://t.me/asya_for_creators_bot?start=dl-17611235582e
 		</div>
 		<script>
 			document.addEventListener('DOMContentLoaded', () => {
+			  // Определяем мобильное устройство
+			  const isMobile = window.innerWidth <= 768;
+			  
 			  const observerOptions = {
-			    threshold: 0.1,
-			    rootMargin: '0px 0px -50px 0px'
+			    threshold: isMobile ? 0.01 : 0.1, // Для мобильных более чувствительный порог
+			    rootMargin: isMobile ? '0px 0px -20px 0px' : '0px 0px -50px 0px'
 			  };
 
 			  const observer = new IntersectionObserver((entries) => {
 			    entries.forEach(entry => {
 			      if (entry.isIntersecting) {
 			        entry.target.classList.add('visible');
+			        // Для мобильных сразу убираем наблюдение после появления
+			        if (isMobile) {
+			          observer.unobserve(entry.target);
+			        }
 			      }
 			    });
 			  }, observerOptions);
 
 			  const animatedElements = document.querySelectorAll('.scroll-animate');
+			  console.log(`Found ${animatedElements.length} animated elements`);
 			  animatedElements.forEach(el => observer.observe(el));
+			  
+			  // Для мобильных показываем все элементы с задержкой
+			  if (isMobile) {
+			    setTimeout(() => {
+			      animatedElements.forEach((el, index) => {
+			        setTimeout(() => {
+			          el.classList.add('visible');
+			        }, index * 100);
+			      });
+			    }, 500);
+			  }
 			});
 		</script>
 		<script>
