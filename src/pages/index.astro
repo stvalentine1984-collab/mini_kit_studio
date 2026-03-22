@@ -488,9 +488,14 @@ const telegramBotUrl = 'https://t.me/asya_for_creators_bot?start=dl-17611235582e
 				16: "Башня", 17: "Звезда", 18: "Луна", 19: "Солнце", 20: "Суд", 21: "Мир", 22: "Шут"
 			};
 
-			function calculateMoneyEnergy() {
+			// Делаем функцию глобальной
+			window.calculateMoneyEnergy = function() {
+				console.log('Function called'); // Для отладки
+				
 				const input = document.getElementById('birthDate').value;
 				const parts = input.split('.');
+				
+				console.log('Input:', input, 'Parts:', parts); // Для отладки
 				
 				if (parts.length !== 3) {
 					alert("Введите дату в формате дд.мм.гггг");
@@ -499,6 +504,8 @@ const telegramBotUrl = 'https://t.me/asya_for_creators_bot?start=dl-17611235582e
 
 				const month = parseInt(parts[1]);
 				const yearStr = parts[2];
+
+				console.log('Month:', month, 'Year:', yearStr); // Для отладки
 
 				// 1. Считаем сумму цифр года (например 1985 -> 1+9+8+5 = 23)
 				let yearSum = yearStr.split('').reduce((acc, digit) => acc + parseInt(digit), 0);
@@ -511,6 +518,8 @@ const telegramBotUrl = 'https://t.me/asya_for_creators_bot?start=dl-17611235582e
 					total -= 22;
 				}
 
+				console.log('Total:', total); // Для отладки
+
 				// Показываем результат
 				document.getElementById('energyName').innerText = arcanaNames[total];
 				document.getElementById('energyImage').src = `/images/money_stone/money_${total}.jpg`;
@@ -518,14 +527,19 @@ const telegramBotUrl = 'https://t.me/asya_for_creators_bot?start=dl-17611235582e
 				
 				// Плавный скролл к результату
 				document.getElementById('resultBlock').scrollIntoView({ behavior: 'smooth' });
-			}
+			};
 
 			// Маска для ввода даты (автоматические точки)
-			document.getElementById('birthDate').addEventListener('input', function (e) {
-				let v = e.target.value.replace(/\D/g, '').slice(0, 8);
-				if (v.length >= 2) v = v.slice(0, 2) + '.' + v.slice(2);
-				if (v.length >= 5) v = v.slice(0, 5) + '.' + v.slice(5);
-				e.target.value = v;
+			document.addEventListener('DOMContentLoaded', function() {
+				const birthDateInput = document.getElementById('birthDate');
+				if (birthDateInput) {
+					birthDateInput.addEventListener('input', function (e) {
+						let v = e.target.value.replace(/\D/g, '').slice(0, 8);
+						if (v.length >= 2) v = v.slice(0, 2) + '.' + v.slice(2);
+						if (v.length >= 5) v = v.slice(0, 5) + '.' + v.slice(5);
+						e.target.value = v;
+					});
+				}
 			});
 		</script>
 	</body>
