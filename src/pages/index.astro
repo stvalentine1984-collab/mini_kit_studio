@@ -522,23 +522,45 @@ const telegramBotUrl = 'https://t.me/asya_for_creators_bot?start=dl-17611235582e
 
 				// Показываем результат
 				document.getElementById('energyName').innerText = arcanaNames[total];
-				const imagePath = `/images/money_stone/money_${total}.jpg`;
-				console.log('Image path:', imagePath); // Для отладки
+				
+				// Пробуем разные пути к картинкам
+				const possiblePaths = [
+					`/images/money_stone/money_${total}.jpg`,
+					`./images/money_stone/money_${total}.jpg`,
+					`images/money_stone/money_${total}.jpg`,
+					`/public/images/money_stone/money_${total}.jpg`
+				];
+				
+				console.log('Trying paths:', possiblePaths);
 				
 				const img = document.getElementById('energyImage');
-				console.log('Image element found:', !!img); // Проверяем что элемент найден
+				console.log('Image element found:', !!img);
 				
-				img.onload = function() {
-					console.log('Image loaded successfully');
-				};
-				img.onerror = function() {
-					console.log('Image failed to load, trying fallback');
-					// Пробуем другой путь или заглушку
-					img.src = `/images/money_stone/money_1.jpg`; // fallback
-				};
+				let pathIndex = 0;
 				
-				console.log('Setting image src to:', imagePath);
-				img.src = imagePath;
+				function tryNextPath() {
+					if (pathIndex >= possiblePaths.length) {
+						console.log('All paths failed, using placeholder');
+						img.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2RkZCIvPjx0ZXh0IHg9IjE1MCIgeT0iMTUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjOTk5Ij5JbWFnZSBOb3QgRm91bmQ8L3RleHQ+PC9zdmc+';
+						return;
+					}
+					
+					const currentPath = possiblePaths[pathIndex];
+					console.log(`Trying path ${pathIndex + 1}: ${currentPath}`);
+					
+					img.onload = function() {
+						console.log(`Image loaded successfully with path: ${currentPath}`);
+					};
+					img.onerror = function() {
+						console.log(`Path ${pathIndex + 1} failed, trying next`);
+						pathIndex++;
+						tryNextPath();
+					};
+					
+					img.src = currentPath;
+				}
+				
+				tryNextPath();
 				
 				document.getElementById('resultBlock').style.display = 'block';
 				console.log('Result block displayed');
