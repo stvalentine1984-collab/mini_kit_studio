@@ -526,7 +526,7 @@ const telegramBotUrl = 'https://t.me/asya_for_creators_bot?start=dl-17611235582e
 				const img = document.getElementById('energyImage');
 				console.log('Image element found:', !!img);
 				
-				// Пробуем путь в корне images
+				// Временно используем заглушку пока не будет правильных картинок
 				const imagePath = `/images/money_${total}.jpg`;
 				console.log('Setting image src to:', imagePath);
 				
@@ -534,9 +534,10 @@ const telegramBotUrl = 'https://t.me/asya_for_creators_bot?start=dl-17611235582e
 					console.log('Image loaded successfully');
 				};
 				img.onerror = function() {
-					console.log('Image failed to load, using hero image permanently');
-					img.src = '/images/hero-main.jpg';
-					img.alt = `Заглушка для энергии ${arcanaNames[total]}`;
+					console.log('Using placeholder image');
+					// Используем красивую заглушку
+					img.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImdyYWQxIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBzdG9wLWNvbG9yPSIjZDQ0YWYzIi8+PHN0b3Agc3RvcC1jb2xvcj0iIzg4NDUxMyIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiBmaWxsPSJ1cmwoI2dyYWQxKSIvPjx0ZXh0IHg9IjE1MCIgeT0iMTIwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjE4IiBmaWxsPSIjMzMzIj48dHNwYW4+PHRzcGFuIHg9Ii0xMCIgeT0iMjAiIGZvbnQtc2l6ZT0iMjQiIGZpbGw9IiNkNGRhZjMiPuK5kDwvdHNwYW4+PHRzcGFuIHg9Ii0yMCIgeT0iMjAiIGZvbnQtc2l6ZT0iMjQiIGZpbGw9IiM4ODQ1MTMiPuePgPC90c3Bhbj48L3RzcGFuPjwvdGV4dD48dGV4dCB4PSIxNTAiIHk9IjE2MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzY2NiI+0JzQvtC0L3QtdGBINC90L7QvNC10YDRgdC40Lk8L3RleHQ+PHRleHQgeD0iMTUwIiB5PSIxODAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9IiNkNGRhZjMiPmFyY2FuYSAjdG90YWw8L3RleHQ+PC9zdmc+';
+					img.alt = `Энергия ${arcanaNames[total]}`;
 				};
 				
 				img.src = imagePath;
