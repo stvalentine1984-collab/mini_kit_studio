@@ -522,7 +522,20 @@ const telegramBotUrl = 'https://t.me/asya_for_creators_bot?start=dl-17611235582e
 
 				// Показываем результат
 				document.getElementById('energyName').innerText = arcanaNames[total];
-				document.getElementById('energyImage').src = `/images/money_stone/money_${total}.jpg`;
+				const imagePath = `/images/money_stone/money_${total}.jpg`;
+				console.log('Image path:', imagePath); // Для отладки
+				
+				const img = document.getElementById('energyImage');
+				img.onload = function() {
+					console.log('Image loaded successfully');
+				};
+				img.onerror = function() {
+					console.log('Image failed to load, trying fallback');
+					// Пробуем другой путь или заглушку
+					img.src = `/images/money_stone/money_1.jpg`; // fallback
+				};
+				img.src = imagePath;
+				
 				document.getElementById('resultBlock').style.display = 'block';
 				
 				// Плавный скролл к результату
