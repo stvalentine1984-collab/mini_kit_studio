@@ -523,44 +523,27 @@ const telegramBotUrl = 'https://t.me/asya_for_creators_bot?start=dl-17611235582e
 				// Показываем результат
 				document.getElementById('energyName').innerText = arcanaNames[total];
 				
-				// Пробуем разные пути к картинкам
-				const possiblePaths = [
-					`/images/money_stone/money_${total}.jpg`,
-					`./images/money_stone/money_${total}.jpg`,
-					`images/money_stone/money_${total}.jpg`,
-					`/public/images/money_stone/money_${total}.jpg`
-				];
-				
-				console.log('Trying paths:', possiblePaths);
-				
 				const img = document.getElementById('energyImage');
 				console.log('Image element found:', !!img);
 				
-				let pathIndex = 0;
+				// Используем тот же путь что и другие картинки
+				const imagePath = `/images/money_stone/money_${total}.jpg`;
+				console.log('Setting image src to:', imagePath);
 				
-				function tryNextPath() {
-					if (pathIndex >= possiblePaths.length) {
-						console.log('All paths failed, using placeholder');
-						img.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2RkZCIvPjx0ZXh0IHg9IjE1MCIgeT0iMTUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjOTk5Ij5JbWFnZSBOb3QgRm91bmQ8L3RleHQ+PC9zdmc+';
-						return;
-					}
-					
-					const currentPath = possiblePaths[pathIndex];
-					console.log(`Trying path ${pathIndex + 1}: ${currentPath}`);
-					
-					img.onload = function() {
-						console.log(`Image loaded successfully with path: ${currentPath}`);
-					};
-					img.onerror = function() {
-						console.log(`Path ${pathIndex + 1} failed, trying next`);
-						pathIndex++;
-						tryNextPath();
-					};
-					
-					img.src = currentPath;
-				}
+				img.onload = function() {
+					console.log('Image loaded successfully');
+				};
+				img.onerror = function() {
+					console.log('Image failed to load, trying hero image as test');
+					// Пробуем рабочую картинку для проверки
+					img.src = '/images/hero-main.jpg';
+					setTimeout(() => {
+						console.log('Now trying money stone again');
+						img.src = imagePath;
+					}, 1000);
+				};
 				
-				tryNextPath();
+				img.src = imagePath;
 				
 				document.getElementById('resultBlock').style.display = 'block';
 				console.log('Result block displayed');
