@@ -367,6 +367,31 @@ const telegramBotUrl = 'https://t.me/asya_for_creators_bot?start=dl-17611235582e
 							</div>
 						</div>
 						
+						<section class="money-calc-section" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(210, 105, 30, 0.2); border-radius: 1rem; padding: 3rem; margin: 3rem 0;">
+							<h2 style="text-align: center; color: #333333; margin-bottom: 2rem;">Расчет камня ТВОЕЙ Денежной Энергии!</h2>
+							
+							<div style="text-align: center; margin-bottom: 2rem;">
+								<input type="text" id="birthDate" placeholder="дд.мм.гггг" maxlength="10" style="padding: 1rem; border-radius: 0.5rem; border: 1px solid #ddd; font-size: 1.1rem; margin-right: 1rem;">
+								<button onclick="calculateMoneyEnergy()" style="padding: 1rem 2rem; background: linear-gradient(135deg, #d2691e, #8b4513); color: white; border: none; border-radius: 0.5rem; font-size: 1.1rem; cursor: pointer; font-weight: 600;">Рассчитать</button>
+							</div>
+
+							<div id="resultBlock" style="display: none; margin-top: 30px; text-align: center;">
+								<h3>Твоя денежная энергия — <span id="energyName" style="color: #d4af37;"></span></h3>
+								
+								<div style="margin: 2rem 0; display: flex; justify-content: center;">
+									<img id="energyImage" src="" alt="Ваша энергия" style="max-width: 300px; border-radius: 15px; border: 2px solid #d4af37; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);">
+								</div>
+
+								<p id="energyDescription" style="margin: 20px 0; font-size: 1.1rem; color: #666666; max-width: 600px; margin-left: auto; margin-right: auto;"></p>
+
+								<div style="margin-top: 2rem;">
+									<a href="https://t.me/asya_for_creators_bot" target="_blank" class="btn btn-primary" style="font-size: 1.2rem; padding: 1.2rem 2.5rem;">
+										Хочу сделать свой денежный браслет
+									</a>
+								</div>
+							</div>
+						</section>
+
 						<h2>У тебя есть 3 пути</h2>
 						<ol style="color: #666666;">
 							<li style="margin-bottom: 1rem;">Оставить всё как есть. Продолжить смотреть на успех других в соцсетях и ждать «лучшего момента», пока депрессия от дня сурка затягивает всё глубже.</li>
@@ -452,6 +477,55 @@ const telegramBotUrl = 'https://t.me/asya_for_creators_bot?start=dl-17611235582e
 
 			  const animatedElements = document.querySelectorAll('.scroll-animate');
 			  animatedElements.forEach(el => observer.observe(el));
+			});
+		</script>
+		<script>
+			// Названия арканов (дополни список сам)
+			const arcanaNames = {
+				1: "Маг", 2: "Верховная Жрица", 3: "Императрица", 4: "Император", 5: "Верховный Жрец",
+				6: "Влюбленные", 7: "Колесница", 8: "Сила", 9: "Отшельник", 10: "Колесо Фортуны",
+				11: "Справедливость", 12: "Повешенный", 13: "Смерть", 14: "Умеренность", 15: "Дьявол",
+				16: "Башня", 17: "Звезда", 18: "Луна", 19: "Солнце", 20: "Суд", 21: "Мир", 22: "Шут"
+			};
+
+			function calculateMoneyEnergy() {
+				const input = document.getElementById('birthDate').value;
+				const parts = input.split('.');
+				
+				if (parts.length !== 3) {
+					alert("Введите дату в формате дд.мм.гггг");
+					return;
+				}
+
+				const month = parseInt(parts[1]);
+				const yearStr = parts[2];
+
+				// 1. Считаем сумму цифр года (например 1985 -> 1+9+8+5 = 23)
+				let yearSum = yearStr.split('').reduce((acc, digit) => acc + parseInt(digit), 0);
+				
+				// 2. Складываем Месяц + Сумма года
+				let total = month + yearSum;
+
+				// 3. Правило 22 (вычитаем 22, пока число не станет <= 22)
+				while (total > 22) {
+					total -= 22;
+				}
+
+				// Показываем результат
+				document.getElementById('energyName').innerText = arcanaNames[total];
+				document.getElementById('energyImage').src = `/images/money_stone/money_${total}.jpg`;
+				document.getElementById('resultBlock').style.display = 'block';
+				
+				// Плавный скролл к результату
+				document.getElementById('resultBlock').scrollIntoView({ behavior: 'smooth' });
+			}
+
+			// Маска для ввода даты (автоматические точки)
+			document.getElementById('birthDate').addEventListener('input', function (e) {
+				let v = e.target.value.replace(/\D/g, '').slice(0, 8);
+				if (v.length >= 2) v = v.slice(0, 2) + '.' + v.slice(2);
+				if (v.length >= 5) v = v.slice(0, 5) + '.' + v.slice(5);
+				e.target.value = v;
 			});
 		</script>
 	</body>
