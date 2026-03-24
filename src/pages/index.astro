@@ -1,38 +1,145 @@
 ---
-const telegramBotUrl = 'https://t.me/asya_for_creators_bot?start=dl-1774332680808'; // Замените на ссылку вашего бота
+const telegramBotUrl = "https://t.me/asya_for_creators_bot?start=dl-1774351895400";
 ---
 
-<html lang="ru" class="dark">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Браслет на миллион!</title>
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-	</head>
-	<body>
-		<style>
-			* {
-				margin: 0;
-				padding: 0;
-				box-sizing: border-box;
-			}
-			
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Расчет Денежной Энергии</title>
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		
+		body {
+			font-family: 'Inter', system-ui, sans-serif;
+			background: linear-gradient(135deg, #ffd4a3 0%, #ff6b6b 100%);
+			min-height: 100vh;
+			color: #333333;
+			padding: 2rem 1rem;
+		}
+		
+		.container {
+			max-width: 800px;
+			margin: 0 auto;
+		}
+		
+		.money-calc-section {
+			background: rgba(255, 255, 255, 0.95);
+			backdrop-filter: blur(10px);
+			border: 1px solid rgba(210, 105, 30, 0.2);
+			border-radius: 1rem;
+			padding: 3rem;
+			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+		}
+		
+		.money-calc-section h2 {
+			text-align: center;
+			color: #333333;
+			margin-bottom: 2rem;
+			font-size: 2rem;
+			font-weight: 700;
+		}
+		
+		.input-group {
+			text-align: center;
+			margin-bottom: 2rem;
+		}
+		
+		#birthDate {
+			padding: 1rem;
+			border-radius: 0.5rem;
+			border: 1px solid #ddd;
+			font-size: 1.1rem;
+			margin-right: 1rem;
+			width: 200px;
+		}
+		
+		.calculate-btn {
+			padding: 1rem 2rem;
+			background: linear-gradient(135deg, #d2691e, #8b4513);
+			color: white;
+			border: none;
+			border-radius: 0.5rem;
+			font-size: 1.1rem;
+			cursor: pointer;
+			font-weight: 600;
+			transition: all 0.3s ease;
+		}
+		
+		.calculate-btn:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 8px 25px rgba(210, 105, 30, 0.3);
+		}
+		
+		#resultBlock {
+			display: none;
+			margin-top: 30px;
+			text-align: center;
+		}
+		
+		#resultBlock h3 {
+			margin-bottom: 1rem;
+		}
+		
+		#energyName {
+			color: #d4af37;
+			font-weight: 600;
+		}
+		
+		.image-container {
+			margin: 2rem 0;
+			display: flex;
+			justify-content: center;
+		}
+		
+		#energyImage {
+			max-width: 300px;
+			border-radius: 15px;
+			border: 2px solid #d4af37;
+			box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+		}
+		
+		#energyDescription {
+			margin: 20px 0;
+			font-size: 1.1rem;
+			color: #666666;
+			max-width: 600px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		
+		.cta-button {
+			margin-top: 2rem;
+		}
+		
+		.cta-button a {
+			font-size: 1.2rem;
+			padding: 1.2rem 2.5rem;
+			background: linear-gradient(135deg, #d2691e, #8b4513);
+			color: white;
+			text-decoration: none;
+			border-radius: 0.5rem;
+			display: inline-block;
+			transition: all 0.3s ease;
+		}
+		
+		.cta-button a:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 8px 25px rgba(210, 105, 30, 0.3);
+		}
+		
+		@media (max-width: 768px) {
 			body {
-				background: linear-gradient(135deg, #ffdab9 0%, #ffa07a 100%);
-				min-height: 100vh;
-				color: #777777;
-				font-family: 'Inter', system-ui, -apple-system, sans-serif;
+				padding: 1rem 0.5rem;
 			}
 			
-			.container {
-				max-width: 1200px;
-				margin: 0 auto;
-				padding: 0 1rem;
+			.money-calc-section {
+				padding: 2rem 1.5rem;
 			}
 			
 			.money-calc-section h2 {
